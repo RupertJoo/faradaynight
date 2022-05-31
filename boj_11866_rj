@@ -1,0 +1,26 @@
+def boj_11866():
+    from collections import deque
+    n,k=map(int,input().split())
+    dq=deque(range(1,n+1))
+    dq.rotate(-k+1)
+    
+    if n==1:
+        print('<1>')
+        return
+    
+
+    list_josephus=[]
+    list_josephus.append(dq.popleft())
+    while len(dq)>1:
+        delta=k%len(dq)
+        dq.rotate(-delta+1)
+        list_josephus.append(dq.popleft())    
+    list_josephus.append(dq.popleft()) 
+    
+    
+    print("<",end='')
+    for i in range(n-1):
+        print("%d, "%list_josephus[i], end='')
+    print(list_josephus[-1], end='')
+    print(">")
+boj_11866()
